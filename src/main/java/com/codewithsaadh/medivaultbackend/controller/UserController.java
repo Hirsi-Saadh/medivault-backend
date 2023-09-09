@@ -1,7 +1,11 @@
 package com.codewithsaadh.medivaultbackend.controller;
 
 import com.codewithsaadh.medivaultbackend.model.User;
+import com.codewithsaadh.medivaultbackend.repository.UserRepository;
 import com.codewithsaadh.medivaultbackend.service.UserService;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.FirebaseToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,24 +21,24 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @PostMapping("/register")
     public User createUser(@RequestBody User user) {
         return userService.createUser(user.getUsername(), user.getUid(), user.getEmail(), user.getUserType());
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<String> loginUser(@RequestBody User user) {
-        // Try to log in the user using the provided credentials
-        String jwtToken = userService.login(user.getUsername(), user.getPassword(), user.getUserType());
-
-        if (jwtToken != null) {
-            // Login successful, return the JWT token in the response
-            return new ResponseEntity<>(jwtToken, HttpStatus.OK);
+    @GetMapping("/usertype")
+    public ResponseEntity<User> getUserByUid(@RequestParam("uid") String uid) {
+        User user = userService.findUserByUid(uid);
+        if (user != null) {
+            return ResponseEntity.ok(user);
         } else {
-            // Login failed, return UNAUTHORIZED status
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            return ResponseEntity.notFound().build();
         }
     }
+
 
     @PostMapping("/logout")
     public ResponseEntity<String> logout() {

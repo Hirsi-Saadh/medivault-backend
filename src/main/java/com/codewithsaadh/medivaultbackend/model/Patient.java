@@ -1,18 +1,28 @@
 package com.codewithsaadh.medivaultbackend.model;
 
 import jakarta.persistence.*;
-import org.springframework.data.annotation.Id;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 @Entity
 @Table(name = "patients")
 @DiscriminatorValue("PATIENT")
-public class Patient extends User{
+public class Patient {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(nullable = false)
+    private String uid;
 
     @Column(nullable = false)
-    private String patientId;
+    private String firstName;
+
+    @Column(nullable = false)
+    private String lastName;
+
+    @Column(nullable = false)
+    private int age;
 
     @Column(nullable = false)
     private LocalDate dateOfBirth;
@@ -20,12 +30,38 @@ public class Patient extends User{
     @Column(nullable = false)
     private String address;
 
-    public String getPatientId() {
-        return patientId;
+
+
+    public String getUid() {
+        return uid;
     }
 
-    public void setPatientId(String patientId) {
-        this.patientId = patientId;
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public LocalDate getDateOfBirth() {
@@ -45,4 +81,24 @@ public class Patient extends User{
     }
 
 
+    @Override
+    public String toString() {
+        return "Patient{" +
+                "uid='" + uid + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                ", dateOfBirth=" + dateOfBirth +
+                ", address='" + address + '\'' +
+                '}';
+    }
+
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
 }
