@@ -2,11 +2,6 @@ package com.codewithsaadh.medivaultbackend.model;
 
 import jakarta.persistence.*;
 import org.springframework.data.annotation.Id;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
-import java.sql.Blob;
-import java.sql.SQLException;
 
 @Entity
 @Table(name = "hospitals")
@@ -34,7 +29,8 @@ public class Hospital {
     private String hospitalType;
 
     @Lob
-    private Blob medicalLicenseBlob;
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] medicalLicenseBlob;
 
     public Long getId() {
         return id;
@@ -85,35 +81,31 @@ public class Hospital {
     }
 
     // Getter and setter for medicalLicenseBlob
-    public Blob getMedicalLicenseBlob() {
+
+    public byte[] getMedicalLicenseBlob() {
         return medicalLicenseBlob;
     }
 
-    public void setMedicalLicenseBlob(Blob medicalLicenseBlob) {
+    public void setMedicalLicenseBlob(byte[] medicalLicenseBlob) {
         this.medicalLicenseBlob = medicalLicenseBlob;
     }
 
-    // Save the image to the database
-    public void saveMedicalLicense(MultipartFile file) throws IOException, SQLException {
-        byte[] imageBytes = file.getBytes();
-        Blob imageBlob = new javax.sql.rowset.serial.SerialBlob(imageBytes);
-        this.medicalLicenseBlob = imageBlob;
-    }
 
-    // Retrieve the image as a byte array
-    public byte[] getMedicalLicense() throws SQLException {
-        if (this.medicalLicenseBlob != null) {
-            int blobLength = (int) this.medicalLicenseBlob.length();
-            return this.medicalLicenseBlob.getBytes(1, blobLength);
-        } else {
-            return null;
-        }
-    }
-
-    {
-
+    @Override
+    public String toString() {
+        return "Hospital{" +
+                "uid='" + uid + '\'' +
+                ", Name='" + hospitalName + '\'' +
+                ", Address=" + hospitalAddress +
+                ", License=" + hospitalLicense +
+                ", license image=" + medicalLicenseBlob +
+                ", type'" + hospitalType + '\'' +
+                '}';
     }
 }
+
+
+
 
 
 

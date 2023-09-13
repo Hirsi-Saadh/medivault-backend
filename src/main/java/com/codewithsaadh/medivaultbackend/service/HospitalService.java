@@ -1,13 +1,11 @@
 package com.codewithsaadh.medivaultbackend.service;
 
 import com.codewithsaadh.medivaultbackend.model.Hospital;
+import com.codewithsaadh.medivaultbackend.model.Patient;
 import com.codewithsaadh.medivaultbackend.repository.HospitalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-import java.sql.Blob;
-import java.time.LocalDate;
 @Service
 public class HospitalService {
 
@@ -20,7 +18,7 @@ public class HospitalService {
     }
 
     public Hospital createHospital(String uid, String hospitalName, String hospitalAddress,
-                                   String hospitalLicense, String hospitalType, Blob medicalLicenseBlob) {
+                                   String hospitalLicense, String hospitalType, byte[] medicalLicenseData) {
         try {
             Hospital hospital = new Hospital();
             hospital.setUid(uid);
@@ -28,7 +26,7 @@ public class HospitalService {
             hospital.setHospitalAddress(hospitalAddress);
             hospital.setHospitalLicense(hospitalLicense);
             hospital.setHospitalType(hospitalType);
-            hospital.setMedicalLicenseBlob(medicalLicenseBlob);
+            hospital.setMedicalLicenseBlob(medicalLicenseData);
 
             Hospital savedHospital = hospitalRepository.save(hospital);
             return savedHospital;
@@ -37,5 +35,13 @@ public class HospitalService {
             throw e; // Re-throw the exception to see the exact error message
         }
     }
+
+    public Hospital findHospitalByUid(String uid) {
+        return hospitalRepository.findByUid(uid);
+    }
+
+
+
+
 
 }
