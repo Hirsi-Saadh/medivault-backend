@@ -4,4 +4,5 @@ import com.codewithsaadh.medivaultbackend.model.Doctor;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface DoctorRepository extends JpaRepository <Doctor, Long> {
+    Doctor findByUid(String uid);
 }

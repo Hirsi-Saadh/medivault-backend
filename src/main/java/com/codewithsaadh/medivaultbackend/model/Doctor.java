@@ -6,25 +6,41 @@ import org.springframework.data.annotation.Id;
 @Entity
 @Table(name = "doctors")
 @DiscriminatorValue("DOCTOR")
-public class Doctor extends User{
+public class Doctor {
+
     @jakarta.persistence.Id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
-
-    @ManyToOne
-    @JoinColumn(name = "hospital_id", referencedColumnName = "id")
-    private Hospital hospital;
+    @Column(nullable = false)
+    private String uid;
 
     @Column(nullable = false)
-    private String name;
+    private String doctorFirstName;
 
     @Column(nullable = false)
-    private String specialization;
+    private String doctorLastName;
+
+    @Column(nullable = false)
+    private String doctorAddress;
+
+    @Column(nullable = false)
+    private String doctorLicense;
+
+    @Column(nullable = false)
+    private String doctorType;
+
+    @Column(nullable = false)
+    private String doctorSpecialization;
+
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] doctorImageBlob;
+
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] doctorLicenseBlob;
 
     public Long getId() {
         return id;
@@ -34,37 +50,92 @@ public class Doctor extends User{
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public String getUid() {
+        return uid;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
-    public Hospital getHospital() {
-        return hospital;
+    public String getDoctorFirstName() {
+        return doctorFirstName;
     }
 
-    public void setHospital(Hospital hospital) {
-        this.hospital = hospital;
+    public void setDoctorFirstName(String doctorFirstName) {
+        this.doctorFirstName = doctorFirstName;
     }
 
-    public String getName() {
-        return name;
+    public String getDoctorLastName() {
+        return doctorLastName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDoctorLastName(String doctorLastName) {
+        this.doctorLastName = doctorLastName;
     }
 
-    public String getSpecialization() {
-        return specialization;
+    public String getDoctorAddress() {
+        return doctorAddress;
     }
 
-    public void setSpecialization(String specialization) {
-        this.specialization = specialization;
+    public void setDoctorAddress(String doctorAddress) {
+        this.doctorAddress = doctorAddress;
     }
+
+    public String getDoctorLicense() {
+        return doctorLicense;
+    }
+
+    public void setDoctorLicense(String doctorLicense) {
+        this.doctorLicense = doctorLicense;
+    }
+
+    public String getDoctorType() {
+        return doctorType;
+    }
+
+    public void setDoctorType(String doctorType) {
+        this.doctorType = doctorType;
+    }
+
+    public String getDoctorSpecialization() {
+        return doctorSpecialization;
+    }
+
+    public void setDoctorSpecialization(String doctorSpecialization) {
+        this.doctorSpecialization = doctorSpecialization;
+    }
+
+    public byte[] getDoctorImageBlob() {
+        return doctorImageBlob;
+    }
+
+    public void setDoctorImageBlob(byte[] doctorImageBlob) {
+        this.doctorImageBlob = doctorImageBlob;
+    }
+
+    public byte[] getDoctorLicenseBlob() {
+        return doctorLicenseBlob;
+    }
+
+    public void setDoctorLicenseBlob(byte[] doctorLicenseBlob) {
+        this.doctorLicenseBlob = doctorLicenseBlob;
+    }
+
+    @Override
+    public String toString() {
+        return "Doctor{" +
+                "uid='" + uid + '\'' +
+                ", First Name='" + doctorFirstName + '\'' +
+                ", Last Name='" + doctorLastName + '\'' +
+                ", Address=" + doctorAddress +
+                ", License=" + doctorLicense +
+                ", license image=" + doctorImageBlob +
+                ", license image=" + doctorLicenseBlob +
+                ", type'" + doctorType + '\'' +
+                '}';
+    }
+
 
 }
 
