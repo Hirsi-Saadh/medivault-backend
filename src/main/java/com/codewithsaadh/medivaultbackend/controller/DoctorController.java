@@ -2,6 +2,7 @@ package com.codewithsaadh.medivaultbackend.controller;
 
 import com.codewithsaadh.medivaultbackend.model.Doctor;
 import com.codewithsaadh.medivaultbackend.model.Hospital;
+import com.codewithsaadh.medivaultbackend.repository.DoctorRepository;
 import com.codewithsaadh.medivaultbackend.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,12 +10,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Base64;
+import java.util.List;
 
 @RestController
 @RequestMapping("/doctor")
 public class DoctorController {
 
     private final DoctorService doctorService;
+
+    @Autowired
+    private DoctorRepository doctorRepository;
 
     @Autowired
     public DoctorController(DoctorService doctorService) {
@@ -74,5 +79,10 @@ public class DoctorController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/all")
+    public List<Doctor> getAllDoctors() {
+        return doctorRepository.findAll();
     }
 }

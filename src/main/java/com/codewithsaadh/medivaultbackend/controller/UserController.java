@@ -3,11 +3,7 @@ package com.codewithsaadh.medivaultbackend.controller;
 import com.codewithsaadh.medivaultbackend.model.User;
 import com.codewithsaadh.medivaultbackend.repository.UserRepository;
 import com.codewithsaadh.medivaultbackend.service.UserService;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthException;
-import com.google.firebase.auth.FirebaseToken;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/users")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 public class UserController {
 
     @Autowired
