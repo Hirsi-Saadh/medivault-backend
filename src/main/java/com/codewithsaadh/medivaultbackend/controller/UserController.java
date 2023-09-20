@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/users")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "https://medivault.techzap.lk")
 public class UserController {
 
     @Autowired
@@ -22,6 +22,9 @@ public class UserController {
 
     @PostMapping("/register")
     public User createUser(@RequestBody User user) {
+
+        System.out.println("Received user data: " + user.toString());
+
         return userService.createUser(user.getUsername(), user.getUid(), user.getEmail(), user.getUserType());
     }
 

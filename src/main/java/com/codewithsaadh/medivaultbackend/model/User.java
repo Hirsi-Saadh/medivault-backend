@@ -1,7 +1,5 @@
 package com.codewithsaadh.medivaultbackend.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 import jakarta.persistence.*;
 
 @Entity
@@ -21,9 +19,8 @@ public class User {
     @Column(nullable = false)
     private String email;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "user_type", nullable = false)
-    private UserType userType;
+    private String userType; // Changed data type to String
 
     public Long getId() {
         return id;
@@ -57,29 +54,23 @@ public class User {
         this.email = email;
     }
 
-    public UserType getUserType() {
+    public String getUserType() {
         return userType;
     }
 
-    public void setUserType(UserType userType) {
+    public void setUserType(String userType) {
         this.userType = userType;
     }
 
-    public enum UserType {
-        PATIENT,
-        DOCTOR,
-        HOSPITAL,
-        PHARMACY,
-        LABORATORY;
-
-        @JsonValue
-        public String getValue() {
-            return this.name().toLowerCase();
-        }
-
-        @JsonCreator
-        public static UserType fromValue(String value) {
-            return valueOf(value.toUpperCase());
-        }
+    @Override
+    public String toString() {
+        return "Doctor{" +
+                "uid='" + uid + '\'' +
+                ", email='" + email + '\'' +
+                ", usertype='" + userType + '\'' +
+                ", username=" + username +
+                '}';
     }
+
+    // Constructors, toString, equals, and hashCode methods as needed
 }

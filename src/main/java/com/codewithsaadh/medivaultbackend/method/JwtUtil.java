@@ -24,7 +24,7 @@ public class JwtUtil {
         Map<String, Object> claims = new HashMap<>();
         claims.put("userId", user.getId());
         claims.put("username", user.getUsername());
-        claims.put("userType", user.getUserType().getValue());
+        claims.put("userType", user.getUserType());
 
         Date now = new Date();
         Date expiration = new Date(now.getTime() + jwtExpirationMs);
@@ -46,7 +46,7 @@ public class JwtUtil {
         // Create and return the User object from the extracted claims
         Long userId = Long.parseLong(claims.get("userId", String.class));
         String username = claims.get("username", String.class);
-        User.UserType userType = User.UserType.valueOf(claims.get("userType", String.class).toUpperCase());
+        String userType = claims.get("userType", String.class);
 
         User user = new User();
         user.setId(userId);

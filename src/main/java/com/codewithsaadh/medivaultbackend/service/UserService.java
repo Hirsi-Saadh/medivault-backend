@@ -19,7 +19,7 @@ public class UserService {
     }
 
 
-    public User createUser(String username, String uid, String email, User.UserType usertype) {
+    public User createUser(String username, String uid, String email, String usertype) {
         // Check if the username already exists
         if (userRepository.findByUsername(username) != null) {
             throw new RuntimeException("Username already exists");

@@ -13,6 +13,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>MediVault Backend</name>
 	<description>Backend for MediVault</description>
+	<packaging>jar</packaging>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -20,6 +21,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -68,15 +70,6 @@
 			<artifactId>javax.servlet-api</artifactId>
 			<version>4.0.1</version> <!-- Use the appropriate version -->
 		</dependency>
-		<dependency>
-			<groupId>com.azure.spring</groupId>
-			<artifactId>spring-cloud-azure-dependencies</artifactId>
-			<version>4.11.0</version>
-			<type>pom</type>
-			<scope>import</scope>
-		</dependency>
-
-
 
 	</dependencies>
 
