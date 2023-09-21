@@ -3,6 +3,8 @@ package com.codewithsaadh.medivaultbackend.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "patients")
@@ -30,6 +32,19 @@ public class Patient {
     @Column(nullable = false)
     private String address;
 
+    public Patient(Long id, String uid, String firstName, String lastName, int age, LocalDate dateOfBirth, String address) {
+        this.id = id;
+        this.uid = uid;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.dateOfBirth = dateOfBirth;
+        this.address = address;
+    }
+
+    public Patient() {
+
+    }
 
 
     public String getUid() {
@@ -101,4 +116,6 @@ public class Patient {
     public Long getId() {
         return id;
     }
+
+
 }
