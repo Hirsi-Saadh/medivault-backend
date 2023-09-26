@@ -1,9 +1,8 @@
 package com.codewithsaadh.medivaultbackend.controller;
 
 import com.codewithsaadh.medivaultbackend.model.Allergy;
-import com.codewithsaadh.medivaultbackend.model.Patient;
-import com.codewithsaadh.medivaultbackend.service.AllergyService;
-import com.codewithsaadh.medivaultbackend.service.PatientService;
+import com.codewithsaadh.medivaultbackend.model.Diagnosis;
+import com.codewithsaadh.medivaultbackend.service.DiagnosisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,26 +12,26 @@ import java.util.Collections;
 import java.util.List;
 
 @RestController
-@RequestMapping("/patients/allergy")
-public class AllergyController {
+@RequestMapping("/patients/diagnosis")
+public class DiagnosisController {
 
-    private final AllergyService allergyService;
+    private final DiagnosisService diagnosisService;
     @Autowired
-    public AllergyController(AllergyService allergyService) {
-        this.allergyService = allergyService;
+    public DiagnosisController(DiagnosisService diagnosisService) {
+        this.diagnosisService = diagnosisService;
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> addAllergies(@RequestBody List<Allergy> allergies) {
+    public ResponseEntity<?> addDiagnosis(@RequestBody List<Diagnosis> diagnoses) {
         try {
             // Log the received allergies for debugging
-            System.out.println("Received allergies: " + allergies);
+            System.out.println("Received diagnosis: " + diagnoses);
 
             // Perform any necessary validation and processing of allergies
-            List<Allergy> createdAllergies = allergyService.createAllergies(allergies);
+            List<Diagnosis> createdDiagnosis = diagnosisService.createDiagnosis(diagnoses);
 
             // Return the created allergies in the response
-            return ResponseEntity.ok(createdAllergies);
+            return ResponseEntity.ok(createdDiagnosis);
         } catch (Exception e) {
             // Handle exceptions gracefully and return a meaningful response
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
@@ -41,25 +40,17 @@ public class AllergyController {
 
 
     @GetMapping("/all")
-    public ResponseEntity<List<Allergy>> getAllergiesForUser(@RequestParam("uid") String userUid) {
+    public ResponseEntity<List<Diagnosis>> getDiagnosisForUser(@RequestParam("uid") String userUid) {
         try {
             // Query the database to retrieve all allergies for the specified user UID
-            List<Allergy> allergies = allergyService.getAllergiesForUser(userUid);
+            List<Diagnosis> diagnosis = diagnosisService.getDiagnosisForUser(userUid);
 
             // Return the list of allergies in the response
-            return ResponseEntity.ok(allergies);
+            return ResponseEntity.ok(diagnosis);
         } catch (Exception e) {
             // Handle exceptions gracefully and return a meaningful response
-            List<Allergy> emptyList = Collections.emptyList();
+            List<Diagnosis> emptyList = Collections.emptyList();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(emptyList);
         }
     }
-
-
-
-
-
-
-
-
 }

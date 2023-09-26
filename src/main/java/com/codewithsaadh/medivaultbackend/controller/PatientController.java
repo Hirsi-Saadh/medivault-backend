@@ -36,7 +36,10 @@ public class PatientController {
                     patient.getLastName(),
                     patient.getAge(),
                     patient.getAddress(),
-                    patient.getDateOfBirth()
+                    patient.getDateOfBirth(),
+                    patient.getHeight(),
+                    patient.getWeight(),
+                    patient.getBloodGroup()
             );
             return ResponseEntity.ok(createdPatient);
         } catch (Exception e) {

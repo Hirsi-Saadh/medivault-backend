@@ -1,5 +1,7 @@
 package com.codewithsaadh.medivaultbackend.model;
 
+import com.codewithsaadh.medivaultbackend.configurations.CustomLocalDateDeserializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -27,12 +29,23 @@ public class Patient {
     private int age;
 
     @Column(nullable = false)
+    @JsonDeserialize(using = CustomLocalDateDeserializer.class)
     private LocalDate dateOfBirth;
 
     @Column(nullable = false)
     private String address;
 
-    public Patient(Long id, String uid, String firstName, String lastName, int age, LocalDate dateOfBirth, String address) {
+    @Column(nullable = false)
+    private int height;
+
+    @Column(nullable = false)
+    private int weight;
+
+    @Column(nullable = false)
+    private String bloodGroup;
+
+
+    public Patient(Long id, String uid, String firstName, String lastName, int age, LocalDate dateOfBirth, String address, int height, int weight, String bloodGroup) {
         this.id = id;
         this.uid = uid;
         this.firstName = firstName;
@@ -40,12 +53,14 @@ public class Patient {
         this.age = age;
         this.dateOfBirth = dateOfBirth;
         this.address = address;
+        this.height = height;
+        this.weight = weight;
+        this.bloodGroup = bloodGroup;
     }
 
     public Patient() {
 
     }
-
 
     public String getUid() {
         return uid;
@@ -95,6 +110,29 @@ public class Patient {
         this.address = address;
     }
 
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    public String getBloodGroup() {
+        return bloodGroup;
+    }
+
+    public void setBloodGroup(String bloodGroup) {
+        this.bloodGroup = bloodGroup;
+    }
 
     @Override
     public String toString() {
@@ -105,6 +143,9 @@ public class Patient {
                 ", age=" + age +
                 ", dateOfBirth=" + dateOfBirth +
                 ", address='" + address + '\'' +
+                ", weight=" + weight +
+                ", height=" + height +
+                ", blood='" + bloodGroup + '\'' +
                 '}';
     }
 

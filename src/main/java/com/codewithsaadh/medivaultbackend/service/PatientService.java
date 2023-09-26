@@ -20,7 +20,7 @@ public class PatientService {
     @Autowired
     private AllergyRepository allergyRepository;
 
-    public Patient createPatient(String uid, String firstName, String lastName, int age, String address, LocalDate dateOfBirth) {
+    public Patient createPatient(String uid, String firstName, String lastName, int age, String address, LocalDate dateOfBirth, int height, int weight, String bloodGroup) {
         try {
             System.out.println("Starting to add to database");
             Patient patient = new Patient();
@@ -30,6 +30,9 @@ public class PatientService {
             patient.setAge(age);
             patient.setAddress(address);
             patient.setDateOfBirth(dateOfBirth);
+            patient.setHeight(height);
+            patient.setWeight(weight);
+            patient.setBloodGroup(bloodGroup);
 
             // You can set other fields as needed
 

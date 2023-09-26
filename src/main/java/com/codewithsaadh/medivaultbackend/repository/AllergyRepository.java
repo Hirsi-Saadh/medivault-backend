@@ -1,6 +1,7 @@
 package com.codewithsaadh.medivaultbackend.repository;
 
 import com.codewithsaadh.medivaultbackend.model.Allergy;
+import com.codewithsaadh.medivaultbackend.model.Patient;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
