@@ -1,5 +1,6 @@
 package com.codewithsaadh.medivaultbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -14,8 +15,9 @@ public class Prescription {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
     @Column(nullable = false)
-    private String channelingUid;
+    private Long channelingUid;
 
     @Column(nullable = false)
     private String medicationName;
@@ -26,10 +28,14 @@ public class Prescription {
     @Column(nullable = false)
     private String medicationType;
 
+    private String doctorUid;
+
+    private String patientUid;
+
     public Prescription() {
     }
 
-    public Prescription(String channelingUid, String medicationName, String dosage, String medicationType) {
+    public Prescription(Long channelingUid, String medicationName, String dosage, String medicationType) {
         this.channelingUid = channelingUid;
         this.medicationName = medicationName;
         this.dosage = dosage;
@@ -44,11 +50,11 @@ public class Prescription {
         this.id = id;
     }
 
-    public String getChannelingUid() {
+    public Long getChannelingUid() {
         return channelingUid;
     }
 
-    public void setChannelingUid(String channelingUid) {
+    public void setChannelingUid(Long channelingUid) {
         this.channelingUid = channelingUid;
     }
 
@@ -75,5 +81,16 @@ public class Prescription {
     public void setMedicationType(String medicationType) {
         this.medicationType = medicationType;
     }
+
+
+    public String getDoctorUid() {
+        return doctorUid;
+    }
+
+
+    public String getPatientUid() {
+        return patientUid;
+    }
+
 }
 

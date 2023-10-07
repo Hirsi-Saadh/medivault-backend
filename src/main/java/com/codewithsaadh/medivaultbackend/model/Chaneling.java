@@ -7,12 +7,11 @@ import org.hibernate.annotations.GenericGenerator;
 import java.util.Date;
 
 @Entity
-@Table(name = "channeling")
-public class Channeling {
+@Table(name = "chaneling")
+public class Chaneling {
 
     @Id
-    @GeneratedValue(generator = "custom-id-generator")
-    @GenericGenerator(name = "custom-id-generator", strategy = "com.codewithsaadh.medivaultbackend.configurations.CustomIDGenerator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -26,13 +25,13 @@ public class Channeling {
     @Column(name = "added_time", nullable = false)
     private Date addedTime;
 
-    public Channeling(Long id, String patientUid, String doctorUid) {
+    public Chaneling(Long id, String patientUid, String doctorUid) {
         this.id = id;
         this.patientUid = patientUid;
         this.doctorUid = doctorUid;
     }
 
-    public Channeling() {
+    public Chaneling() {
 
     }
 
