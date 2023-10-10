@@ -22,5 +22,16 @@ public class PrescriptionService {
         }
 
 
+        public List<Prescription> getAllPrescriptionsByChanelingId(Long chanelingId) {
+            // Call the repository to retrieve prescriptions based on the Chaneling ID
+            return prescriptionRepository.findByChannelingUid(chanelingId);
+        }
+
+        public List<Prescription> getPrescriptionsByChannelingId(Long channelingId) {
+            // Call the repository to retrieve prescriptions based on the Channeling ID
+            return prescriptionRepository.findByChannelingUid(channelingId);
+        }
+
+
 
 }

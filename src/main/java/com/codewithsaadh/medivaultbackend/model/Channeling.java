@@ -2,13 +2,12 @@ package com.codewithsaadh.medivaultbackend.model;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Date;
 
 @Entity
 @Table(name = "chaneling")
-public class Chaneling {
+public class Channeling {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,13 +24,16 @@ public class Chaneling {
     @Column(name = "added_time", nullable = false)
     private Date addedTime;
 
-    public Chaneling(Long id, String patientUid, String doctorUid) {
+    private String doctorFirstName;
+    private String doctorLastName;
+
+    public Channeling(Long id, String patientUid, String doctorUid) {
         this.id = id;
         this.patientUid = patientUid;
         this.doctorUid = doctorUid;
     }
 
-    public Chaneling() {
+    public Channeling() {
 
     }
 
@@ -65,5 +67,21 @@ public class Chaneling {
 
     public void setAddedTime(Date addedTime) {
         this.addedTime = addedTime;
+    }
+
+    public String getDoctorFirstName() {
+        return doctorFirstName;
+    }
+
+    public void setDoctorFirstName(String doctorFirstName) {
+        this.doctorFirstName = doctorFirstName;
+    }
+
+    public String getDoctorLastName() {
+        return doctorLastName;
+    }
+
+    public void setDoctorLastName(String doctorLastName) {
+        this.doctorLastName = doctorLastName;
     }
 }
