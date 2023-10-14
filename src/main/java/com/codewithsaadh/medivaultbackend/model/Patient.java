@@ -3,6 +3,7 @@ package com.codewithsaadh.medivaultbackend.model;
 import com.codewithsaadh.medivaultbackend.configurations.CustomLocalDateDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -45,6 +46,8 @@ public class Patient {
     private String bloodGroup;
 
 
+
+
     public Patient(Long id, String uid, String firstName, String lastName, int age, LocalDate dateOfBirth, String address, int height, int weight, String bloodGroup) {
         this.id = id;
         this.uid = uid;
@@ -56,6 +59,7 @@ public class Patient {
         this.height = height;
         this.weight = weight;
         this.bloodGroup = bloodGroup;
+
     }
 
     public Patient() {
@@ -133,6 +137,7 @@ public class Patient {
     public void setBloodGroup(String bloodGroup) {
         this.bloodGroup = bloodGroup;
     }
+
 
     @Override
     public String toString() {

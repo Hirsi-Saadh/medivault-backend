@@ -1,16 +1,12 @@
 package com.codewithsaadh.medivaultbackend.service;
 
-import com.codewithsaadh.medivaultbackend.model.Allergy;
 import com.codewithsaadh.medivaultbackend.model.Patient;
-import com.codewithsaadh.medivaultbackend.model.User;
 import com.codewithsaadh.medivaultbackend.repository.AllergyRepository;
 import com.codewithsaadh.medivaultbackend.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class PatientService {

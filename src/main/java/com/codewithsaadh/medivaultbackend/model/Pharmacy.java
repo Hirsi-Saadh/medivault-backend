@@ -7,20 +7,30 @@ import org.springframework.data.annotation.Id;
 @Table(name = "pharmacies")
 @DiscriminatorValue("PHARMACY")
 public class Pharmacy {
+
     @jakarta.persistence.Id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
+    @Column(nullable = false)
+    private String uid;
 
     @Column(nullable = false)
-    private String name;
+    private String pharmacyName;
 
     @Column(nullable = false)
-    private String address;
+    private String pharmacyAddress;
+
+    @Column(nullable = false)
+    private String pharmacyLicense;
+
+    @Column(nullable = false)
+    private String pharmacyType;
+
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] pharmacyLicenseBlob;
 
     public Long getId() {
         return id;
@@ -30,29 +40,52 @@ public class Pharmacy {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public String getUid() {
+        return uid;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
-    public String getName() {
-        return name;
+    public String getPharmacyName() {
+        return pharmacyName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPharmacyName(String pharmacyName) {
+        this.pharmacyName = pharmacyName;
     }
 
-    public String getAddress() {
-        return address;
+    public String getPharmacyAddress() {
+        return pharmacyAddress;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setPharmacyAddress(String pharmacyAddress) {
+        this.pharmacyAddress = pharmacyAddress;
     }
 
+    public String getPharmacyLicense() {
+        return pharmacyLicense;
+    }
+
+    public void setPharmacyLicense(String pharmacyLicense) {
+        this.pharmacyLicense = pharmacyLicense;
+    }
+
+    public String getPharmacyType() {
+        return pharmacyType;
+    }
+
+    public void setPharmacyType(String pharmacyType) {
+        this.pharmacyType = pharmacyType;
+    }
+
+    public byte[] getPharmacyLicenseBlob() {
+        return pharmacyLicenseBlob;
+    }
+
+    public void setPharmacyLicenseBlob(byte[] pharmacyLicenseBlob) {
+        this.pharmacyLicenseBlob = pharmacyLicenseBlob;
+    }
 }
 

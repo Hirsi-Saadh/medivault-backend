@@ -10,10 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping("/patients")
@@ -26,9 +23,11 @@ public class PatientController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Patient> addPatient(@RequestBody Patient patient) {
+    public ResponseEntity<Patient> addPatient(@RequestBody Patient patient ) {
         try {
             System.out.println("Received patient data: " + patient.toString());
+
+
 
             Patient createdPatient = patientService.createPatient(
                     patient.getUid(),
@@ -40,6 +39,7 @@ public class PatientController {
                     patient.getHeight(),
                     patient.getWeight(),
                     patient.getBloodGroup()
+
             );
             return ResponseEntity.ok(createdPatient);
         } catch (Exception e) {
