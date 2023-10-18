@@ -51,15 +51,22 @@ public class PatientController {
         // Add other controller methods as needed
     }
 
+    // Frontend request to obtain patient info
     @GetMapping("/info")
     public ResponseEntity<Patient> getUserByUid(@RequestParam("uid") String uid) {
+        //method to match the patient with the received UID
         Patient patient = patientService.findPatientByUid(uid);
+
         if (patient != null) {
+            //response if patient is available
             return ResponseEntity.ok(patient);
         } else {
+            //response if patient is unavailable
             return ResponseEntity.notFound().build();
         }
     }
+
+
 
 
 

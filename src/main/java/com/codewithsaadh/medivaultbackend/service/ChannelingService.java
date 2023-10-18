@@ -4,11 +4,13 @@ import com.codewithsaadh.medivaultbackend.model.Channeling;
 import com.codewithsaadh.medivaultbackend.model.Doctor;
 import com.codewithsaadh.medivaultbackend.repository.ChannelingRepository;
 import com.codewithsaadh.medivaultbackend.repository.DoctorRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ChannelingService {
@@ -59,6 +61,11 @@ public class ChannelingService {
 
         return channelingRepository.findByPatientUidAndDoctorUid(patientUid, doctorUid);
     }
+
+
+
+
+
 
 
 

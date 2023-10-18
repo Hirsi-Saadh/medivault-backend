@@ -1,20 +1,35 @@
 package com.codewithsaadh.medivaultbackend.controller;
 
-import com.codewithsaadh.medivaultbackend.model.Hospital;
-import com.codewithsaadh.medivaultbackend.model.Pharmacy;
+import com.codewithsaadh.medivaultbackend.model.*;
+import com.codewithsaadh.medivaultbackend.service.ChannelingService;
+import com.codewithsaadh.medivaultbackend.service.PatientService;
 import com.codewithsaadh.medivaultbackend.service.PharmacyService;
+import com.codewithsaadh.medivaultbackend.service.PrescriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Base64;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/pharmacy")
 public class PharmacyController {
 
-    private final PharmacyService pharmacyService;
+    @Autowired
+    private PrescriptionService prescriptionService;
+
+    @Autowired
+    private PharmacyService pharmacyService;
+
+    @Autowired
+    private PatientService patientService;
+
+    @Autowired
+    private ChannelingService channelingService;
 
     @Autowired
     public PharmacyController(PharmacyService pharmacyService) {
@@ -71,4 +86,45 @@ public class PharmacyController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/viewByChannelingId/{channelingId}")
+    public ResponseEntity<?> viewPrescriptionAndPatientData(@PathVariable Long channelingId) {
+        try {
+            // Fetch prescription data based on channelingId
+            List<Prescription> prescription = pharmacyService.getAllPrescriptionsByChannelingId(channelingId);
+
+            // Fetch channeling data to obtain patientUid
+            Channeling channeling = pharmacyService.getChannelingById(channelingId);
+
+            if (prescription == null || channeling == null) {
+                return ResponseEntity.notFound().build();
+            }
+
+            // Obtain the patient UID from channeling data
+            String patientUid = channeling.getPatientUid();
+
+            // Fetch patient data based on the patient UID
+            Patient patient = patientService.findPatientByUid(patientUid);
+
+            if (patient == null) {
+                return ResponseEntity.notFound().build();
+            }
+
+            // Create a response object or use a map to package the prescription and patient data
+            Map<String, Object> response = new HashMap<>();
+            response.put("prescription", prescription);
+            response.put("patient", patient);
+
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while fetching data.");
+        }
+    }
+
+
+
+
 }
+
+
+

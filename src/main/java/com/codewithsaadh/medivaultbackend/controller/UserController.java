@@ -20,11 +20,13 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    //get new user data
     @PostMapping("/register")
     public User createUser(@RequestBody User user) {
-
+        //show data received in backend
         System.out.println("Received user data: " + user.toString());
 
+        //return created user to frontend
         return userService.createUser(user.getUsername(), user.getUid(), user.getEmail(), user.getUserType());
     }
 

@@ -5,22 +5,32 @@ import org.springframework.data.annotation.Id;
 
 @Entity
 @Table(name = "laboratories")
-@DiscriminatorValue("LABORATORY")
-public class Laboratory extends User{
+@DiscriminatorValue("PHARMACY")
+public class Laboratory {
+
     @jakarta.persistence.Id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
+    @Column(nullable = false)
+    private String uid;
 
     @Column(nullable = false)
-    private String name;
+    private String laboratoryName;
 
     @Column(nullable = false)
-    private String address;
+    private String laboratoryAddress;
+
+    @Column(nullable = false)
+    private String laboratoryLicense;
+
+    @Column(nullable = false)
+    private String laboratoryType;
+
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] laboratoryLicenseBlob;
 
     public Long getId() {
         return id;
@@ -30,29 +40,56 @@ public class Laboratory extends User{
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public String getUid() {
+        return uid;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
-    public String getName() {
-        return name;
+    public String getLaboratoryName() {
+        return laboratoryName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLaboratoryName(String laboratoryName) {
+        this.laboratoryName = laboratoryName;
     }
 
-    public String getAddress() {
-        return address;
+    public String getLaboratoryAddress() {
+        return laboratoryAddress;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setLaboratoryAddress(String laboratoryAddress) {
+        this.laboratoryAddress = laboratoryAddress;
     }
 
+    public String getLaboratoryLicense() {
+        return laboratoryLicense;
+    }
+
+    public void setLaboratoryLicense(String laboratoryLicense) {
+        this.laboratoryLicense = laboratoryLicense;
+    }
+
+    public String getLaboratoryType() {
+        return laboratoryType;
+    }
+
+    public void setLaboratoryType(String laboratoryType) {
+        this.laboratoryType = laboratoryType;
+    }
+
+    public byte[] getLaboratoryLicenseBlob() {
+        return laboratoryLicenseBlob;
+    }
+
+    public void setLaboratoryLicenseBlob(byte[] laboratoryLicenseBlob) {
+        this.laboratoryLicenseBlob = laboratoryLicenseBlob;
+    }
+
+    public void setMedicalLicenseBlob(byte[] medicalLicenseData) {
+
+    }
 }
 

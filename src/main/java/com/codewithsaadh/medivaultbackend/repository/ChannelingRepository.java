@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ChannelingRepository extends JpaRepository<Channeling, Long> {
     List<Channeling> findAllByPatientUid(@Param("patient_uid") String patientUid);
@@ -12,5 +13,6 @@ public interface ChannelingRepository extends JpaRepository<Channeling, Long> {
     List<Channeling> findByPatientUid(String patientUid);
 
     List<Channeling> findByPatientUidAndDoctorUid(String patientUid, String doctorUid);
+
 }
 

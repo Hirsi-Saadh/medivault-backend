@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface PrescriptionRepository extends JpaRepository<Prescription, Long> {
     List<Prescription> findByChannelingUid(Long channelingUid);
+
+    List<Prescription> findAllByChannelingUid(Long channelingId);
 }

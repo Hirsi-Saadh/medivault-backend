@@ -3,10 +3,12 @@ package com.codewithsaadh.medivaultbackend.service;
 import com.codewithsaadh.medivaultbackend.model.Patient;
 import com.codewithsaadh.medivaultbackend.repository.AllergyRepository;
 import com.codewithsaadh.medivaultbackend.repository.PatientRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Service
 public class PatientService {
@@ -45,6 +47,10 @@ public class PatientService {
     public Patient findPatientByUid(String uid) {
         return patientRepository.findByUid(uid);
     }
+
+
+
+
 
 
 
